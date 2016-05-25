@@ -6,7 +6,11 @@
 /.settings/
 
 /node_modules/
+/.npmignore
 /npm-debug.log
 
-/lib/
 /tmp/
+/.babelrc
+/.jshintrc
+/.travis.yml
+/gulpfile.babel.js
