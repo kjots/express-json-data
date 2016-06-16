@@ -43,10 +43,17 @@
     "jshint-stylish": "^2.2.0",
     "mocha": "^2.5.2",
     "mocha-sinon": "^1.1.5",
+    "node-mocks-http": "^1.5.2",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0"
   },
   "peerDependencies": {
     "babel-polyfill": "^6.9.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "fast-json-patch": "^0.5.7",
+    "lodash": "^4.13.1"
   }
 }
