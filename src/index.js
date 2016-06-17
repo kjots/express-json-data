@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import fastJsonPatch from 'fast-json-patch';
 
-export default function expressDataRouter({ data = {}, limit } = {}) {
+export default function expressJsonData({ data = {}, limit } = {}) {
     function getData(path) {
         // See https://github.com/Starcounter-Jack/JSON-Patch/issues/66
         let pointer = { op: '_get', path };
