@@ -67,9 +67,9 @@ Type: `String` or `Array<String>` or `Function<String, Boolean>`
 
 Default: `[ 'application/json', 'application/json-patch+json' ]`
 
-The support media types for `PUT`, `POST` and `PATCH` requests.
+The supported media types for `PUT`, `POST` and `PATCH` requests.
 
-The type value is passed directly to [body-parser.json()](https://www.npmjs.com/package/body-parser#type) without
+The type value is passed directly to [bodyParser.json()](https://www.npmjs.com/package/body-parser#type) without
 modification.
 
 ## HTTP Methods
