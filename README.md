@@ -62,6 +62,16 @@ The maximum body size for `PUT`, `POST` and `PATCH` requests.
 The limit value is passed directly to [bodyParser.json()](https://www.npmjs.com/package/body-parser#limit) without
 modification.
 
+##### type
+Type: `String` or `Array<String>` or `Function<String, Boolean>`
+
+Default: `[ 'application/json', 'application/json-patch+json' ]`
+
+The support media types for `PUT`, `POST` and `PATCH` requests.
+
+The type value is passed directly to [body-parser.json()](https://www.npmjs.com/package/body-parser#type) without
+modification.
+
 ## HTTP Methods
 
 All of the following HTTP methods may be used with the base URI (e.g. `/data`) or with any path beneath the base URI 

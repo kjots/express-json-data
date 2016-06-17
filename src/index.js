@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import fastJsonPatch from 'fast-json-patch';
 
-export default function expressJsonData({ data = {}, limit } = {}) {
+export default function expressJsonData({ data = {}, limit, type = [ 'application/json', 'application/json-patch+json' ] } = {}) {
     function getData(path) {
         // See https://github.com/Starcounter-Jack/JSON-Patch/issues/66
         let pointer = { op: '_get', path };
@@ -39,7 +39,7 @@ export default function expressJsonData({ data = {}, limit } = {}) {
 
             return res.end();
         })
-        .use(bodyParser.json({ limit }))
+        .use(bodyParser.json({ limit, type }))
         .put('/', (req, res) => {
             clearData();
 
