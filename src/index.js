@@ -12,7 +12,7 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
 
         return pointer.value;
     }
-    
+
     function clearData() {
         Object.keys(data).forEach(key => delete data[key]);
     }
@@ -32,12 +32,12 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
         .delete('/', (req, res) => {
             clearData();
 
-            return res.end();
+            return res.status(204).end();
         })
         .delete('/*', (req, res) => {
             fastJsonPatch.apply(data, [{ op: 'remove', path: req.path }]);
 
-            return res.end();
+            return res.status(204).end();
         })
         .use(bodyParser.json({ limit, type }))
         .put('/', (req, res) => {

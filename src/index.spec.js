@@ -68,11 +68,17 @@ describe('expressJsonData()', () => {
             let req = nodeMocksHttp.createRequest({ method: 'DELETE', url: '/' });
             let res = nodeMocksHttp.createResponse();
 
+            sinon.spy(res, 'status');
+            sinon.spy(res, 'end');
+
             // When
             expressJsonData({ data })(req, res);
 
             // Then
             expect(data).to.eql({});
+
+            expect(res.status).to.have.been.calledWith(204);
+            expect(res.end).to.have.been.called;
         });
     });
 
@@ -82,11 +88,17 @@ describe('expressJsonData()', () => {
             let req = nodeMocksHttp.createRequest({ method: 'DELETE', url: '/testItem' });
             let res = nodeMocksHttp.createResponse();
 
+            sinon.spy(res, 'status');
+            sinon.spy(res, 'end');
+
             // When
             expressJsonData({ data })(req, res);
 
             // Then
             expect(data).to.eql({});
+
+            expect(res.status).to.have.been.calledWith(204);
+            expect(res.end).to.have.been.called;
         });
     });
 
