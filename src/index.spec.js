@@ -83,22 +83,42 @@ describe('expressJsonData()', () => {
     });
 
     context('on DELETE /*', () => {
-        it('should remove the data item', () => {
-            // Given
-            let req = nodeMocksHttp.createRequest({ method: 'DELETE', url: '/testItem' });
-            let res = nodeMocksHttp.createResponse();
+        context('when the data item exists', () => {
+            it('should remove the data item', () => {
+                // Given
+                let req = nodeMocksHttp.createRequest({ method: 'DELETE', url: '/testItem' });
+                let res = nodeMocksHttp.createResponse();
 
-            sinon.spy(res, 'status');
-            sinon.spy(res, 'end');
+                sinon.spy(res, 'status');
+                sinon.spy(res, 'end');
 
-            // When
-            expressJsonData({ data })(req, res);
+                // When
+                expressJsonData({ data })(req, res);
 
-            // Then
-            expect(data).to.eql({});
+                // Then
+                expect(data).to.eql({});
 
-            expect(res.status).to.have.been.calledWith(204);
-            expect(res.end).to.have.been.called;
+                expect(res.status).to.have.been.calledWith(204);
+                expect(res.end).to.have.been.called;
+            });
+        });
+
+        context('when the data item does not exist', () => {
+            it('should respond with HTTP 404 Not Found', () => {
+                // Given
+                let req = nodeMocksHttp.createRequest({ method: 'DELETE', url: '/notTestItem' });
+                let res = nodeMocksHttp.createResponse();
+
+                sinon.spy(res, 'status');
+                sinon.spy(res, 'end');
+
+                // When
+                expressJsonData({ data })(req, res);
+
+                // Then
+                expect(res.status).to.have.been.calledWith(404);
+                expect(res.end).to.have.been.called;
+            });
         });
     });
 

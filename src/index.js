@@ -35,6 +35,10 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
             return res.status(204).end();
         })
         .delete('/*', (req, res) => {
+            if (getData(req.path) === undefined) {
+                return res.status(404).end();
+            }
+
             fastJsonPatch.apply(data, [{ op: 'remove', path: req.path }]);
 
             return res.status(204).end();
