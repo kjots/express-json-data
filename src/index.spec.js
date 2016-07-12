@@ -1,5 +1,4 @@
 import nodeMocksHttp from 'node-mocks-http';
-import sinon from 'sinon';
 
 import expressJsonData from './index.js';
 

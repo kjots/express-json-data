@@ -1,3 +1,11 @@
-import mochaSinon from 'mocha-sinon';
+import sinon from 'sinon';
 
-mochaSinon();
+beforeEach(() => {
+    global.sinon = sinon.sandbox.create();
+});
+
+afterEach(() => {
+    global.sinon.restore();
+
+    delete global.sinon;
+});

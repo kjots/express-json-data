@@ -42,7 +42,6 @@
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0",
     "mocha": "^2.5.3",
-    "mocha-sinon": "^1.1.5",
     "node-mocks-http": "^1.5.2",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0"
