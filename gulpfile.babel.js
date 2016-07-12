@@ -5,7 +5,7 @@ import chokidar from 'chokidar';
 import del from 'del';
 import gulp from 'gulp';
 import gulpBabel from 'gulp-babel';
-import gulpJshint from 'gulp-jshint';
+import gulpEslint from 'gulp-eslint';
 import gulpMocha from 'gulp-mocha';
 import gulpSourcemaps from 'gulp-sourcemaps';
 import gulpUtil from 'gulp-util';
@@ -42,13 +42,13 @@ function compile(pattern, logErrors) {
         .pipe(gulp.dest('lib'));
 }
 
-gulp.task('test', [ 'test:jshint', 'test:mocha' ]);
+gulp.task('test', [ 'test:eslint', 'test:mocha' ]);
 
-gulp.task('test:jshint', [], () => {
+gulp.task('test:eslint', [], () => {
     return gulp.src(srcPattern)
-        .pipe(gulpJshint())
-        .pipe(gulpJshint.reporter('jshint-stylish'))
-        .pipe(gulpJshint.reporter('fail'));
+        .pipe(gulpEslint())
+        .pipe(gulpEslint.format())
+        .pipe(gulpEslint.failAfterError());
 });
 
 gulp.task('test:mocha', [], () => {
