@@ -52,7 +52,7 @@ gulp.task('test:eslint', [], () => {
 });
 
 gulp.task('test:mocha', [], () => {
-    return gulp.src([ 'test/**/*.spec.js', 'src/**/*.spec.js' ], { read: false })
+    return gulp.src([ 'test/init.spec.js', 'src/**/*.spec.js' ], { read: false })
         .pipe(gulpMocha({
             require: [ './test/init.js' ]
         }));
