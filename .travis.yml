@@ -3,4 +3,4 @@ node_js:
   - '6'
   - '5'
   - '4'
-before_install: if [ `npm -v | sed -e 's/^\([0-9]*\)\..*$/\1/'` -lt 3 ] ; then npm install -g npm@3 && echo "Using npm v`npm -v`" ; fi
+before_install: if [ `npm -v | sed -e 's/^\([0-9]*\)\..*$/\1/'` -lt 3 ] ; then npm install -g npm@3 ; fi
