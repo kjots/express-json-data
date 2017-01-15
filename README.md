@@ -1,14 +1,14 @@
 # express-json-data
 
 [![Build Status](https://travis-ci.org/kjots/express-json-data.svg?branch=master)](https://travis-ci.org/kjots/express-json-data)
-[![npm version](https://badge.fury.io/js/express-json-data.svg)](https://www.npmjs.com/package/express-json-data)
+[![npm version](https://badge.fury.io/js/%40kjots%2Fexpress-json-data.svg)](https://www.npmjs.com/package/@kjots/express-json-data)
 
 > A JSON data object Express router with PATCH support.
 
 ## Installation
 
 ```shell
-npm install --save express-json-data
+npm install --save @kjots/express-json-data
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ npm install --save express-json-data
 
 ```js
 import express from 'express';
-import expressJsonData from 'express-json-data';
+import expressJsonData from '@kjots/express-json-data';
 
 let data = {};
 
@@ -31,7 +31,7 @@ let app = express()
 require('babel-polyfill');
 
 var express = require('express');
-var expressJsonData = require('express-json-data').default;
+var expressJsonData = require('@kjots/express-json-data').default;
 
 var data = {};
 
