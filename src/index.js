@@ -4,15 +4,6 @@ import express from 'express';
 import fastJsonPatch from 'fast-json-patch';
 
 export default function expressJsonData({ data = {}, limit, type = [ 'application/json', 'application/json-patch+json' ] } = {}) {
-    function getData(path) {
-        // See https://github.com/Starcounter-Jack/JSON-Patch/issues/66
-        let pointer = { op: '_get', path };
-
-        fastJsonPatch.applyOperation(data, pointer);
-
-        return pointer.value;
-    }
-
     function clearData() {
         Object.keys(data).forEach(key => delete data[key]);
     }
@@ -22,7 +13,7 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
             return res.json(data);
         })
         .get('/*', (req, res) => {
-            let value = getData(req.path);
+            let value = fastJsonPatch.getValueByPointer(data, req.path);
             if (value === undefined) {
                 return res.status(404).end();
             }
@@ -35,7 +26,7 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
             return res.status(204).end();
         })
         .delete('/*', (req, res) => {
-            if (getData(req.path) === undefined) {
+            if (fastJsonPatch.getValueByPointer(data, req.path) === undefined) {
                 return res.status(404).end();
             }
 
@@ -62,7 +53,7 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
             return res.status(201).json(data);
         })
         .post('/*', (req, res) => {
-            let value = _.merge({}, getData(req.path), req.body);
+            let value = _.merge({}, fastJsonPatch.getValueByPointer(data, req.path), req.body);
 
             fastJsonPatch.applyOperation(data, { op: 'replace', path: req.path, value });
 
@@ -79,7 +70,7 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
             return res.status(201).json(data);
         })
         .patch('/*', (req, res) => {
-            let value = getData(req.path);
+            let value = fastJsonPatch.getValueByPointer(data, req.path);
             if (value === undefined) {
                 return res.status(404).end();
             }
