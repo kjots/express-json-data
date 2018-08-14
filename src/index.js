@@ -8,7 +8,7 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
         // See https://github.com/Starcounter-Jack/JSON-Patch/issues/66
         let pointer = { op: '_get', path };
 
-        fastJsonPatch.apply(data, [ pointer ]);
+        fastJsonPatch.applyOperation(data, pointer);
 
         return pointer.value;
     }
@@ -39,7 +39,7 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
                 return res.status(404).end();
             }
 
-            fastJsonPatch.apply(data, [{ op: 'remove', path: req.path }]);
+            fastJsonPatch.applyOperation(data, { op: 'remove', path: req.path });
 
             return res.status(204).end();
         })
@@ -52,7 +52,7 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
             return res.status(201).json(data);
         })
         .put('/*', (req, res) => {
-            fastJsonPatch.apply(data, [{ op: 'replace', path: req.path, value: req.body }]);
+            fastJsonPatch.applyOperation(data, { op: 'replace', path: req.path, value: req.body });
 
             return res.status(201).json(req.body);
         })
@@ -64,12 +64,17 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
         .post('/*', (req, res) => {
             let value = _.merge({}, getData(req.path), req.body);
 
-            fastJsonPatch.apply(data, [{ op: 'replace', path: req.path, value }]);
+            fastJsonPatch.applyOperation(data, { op: 'replace', path: req.path, value });
 
             return res.status(201).json(value);
         })
         .patch('/', (req, res) => {
-            fastJsonPatch.apply(data, Array.isArray(req.body) ? req.body : [ req.body ]);
+            if (Array.isArray(req.body)) {
+                fastJsonPatch.applyPatch(data, req.body);
+            }
+            else {
+                fastJsonPatch.applyOperation(data, req.body);
+            }
 
             return res.status(201).json(data);
         })
@@ -79,7 +84,12 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
                 return res.status(404).end();
             }
 
-            fastJsonPatch.apply(value, Array.isArray(req.body) ? req.body : [ req.body ]);
+            if (Array.isArray(req.body)) {
+                fastJsonPatch.applyPatch(value, req.body);
+            }
+            else {
+                fastJsonPatch.applyOperation(value, req.body);
+            }
 
             return res.status(201).json(value);
         });
