@@ -45,8 +45,24 @@ function compile(pattern, logErrors) {
 
 gulp.task('test', [ 'test:eslint', 'test:mocha' ]);
 
-gulp.task('test:eslint', [], () => {
+gulp.task('test:eslint', [ 'test:eslint:gulpfile', 'test:eslint:src', 'test:eslint:spec' ]);
+
+gulp.task('test:eslint:gulpfile', () => {
+    return gulp.src(__filename)
+        .pipe(gulpEslint())
+        .pipe(gulpEslint.format())
+        .pipe(gulpEslint.failAfterError());
+});
+
+gulp.task('test:eslint:src', () => {
     return gulp.src(srcPattern)
+        .pipe(gulpEslint())
+        .pipe(gulpEslint.format())
+        .pipe(gulpEslint.failAfterError());
+});
+
+gulp.task('test:eslint:spec', () => {
+    return gulp.src(specPattern)
         .pipe(gulpEslint())
         .pipe(gulpEslint.format())
         .pipe(gulpEslint.failAfterError());
