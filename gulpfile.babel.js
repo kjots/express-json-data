@@ -13,6 +13,7 @@ import path from 'path';
 
 const srcBaseDir = path.resolve('src');
 const srcPattern = path.resolve(srcBaseDir, '**/!(*.spec).js');
+const specPattern = path.resolve(srcBaseDir, '**/*.spec.js');
 
 const libBaseDir = path.resolve('lib');
 
@@ -52,10 +53,8 @@ gulp.task('test:eslint', [], () => {
 });
 
 gulp.task('test:mocha', [], () => {
-    return gulp.src([ 'test/init.spec.js', 'src/**/*.spec.js' ], { read: false })
-        .pipe(gulpMocha({
-            require: [ 'babel-core/register', 'babel-polyfill', './test/init.js' ]
-        }));
+    return gulp.src(specPattern, { read: false })
+        .pipe(gulpMocha({ require: [ 'babel-core/register', 'babel-polyfill' ] }));
 });
 
 gulp.task('compile', () => compile(srcPattern));

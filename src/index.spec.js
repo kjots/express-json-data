@@ -1,6 +1,19 @@
+import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
 import nodeMocksHttp from 'node-mocks-http';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 
 import expressJsonData from './index.js';
+
+const { expect } = chai
+    .use(chaiAsPromised)
+    .use(sinonChai);
+
+let sandbox;
+
+beforeEach(() => sandbox = sinon.createSandbox());
+afterEach(() => sandbox.restore());
 
 describe('expressJsonData()', () => {
     let data;
@@ -15,7 +28,7 @@ describe('expressJsonData()', () => {
             let req = nodeMocksHttp.createRequest({ method: 'GET', url: '/' });
             let res = nodeMocksHttp.createResponse();
 
-            sinon.spy(res, 'json');
+            sandbox.spy(res, 'json');
 
             // When
             expressJsonData({ data })(req, res);
@@ -32,7 +45,7 @@ describe('expressJsonData()', () => {
                 let req = nodeMocksHttp.createRequest({ method: 'GET', url: '/testItem' });
                 let res = nodeMocksHttp.createResponse();
 
-                sinon.spy(res, 'json');
+                sandbox.spy(res, 'json');
 
                 // When
                 expressJsonData({ data })(req, res);
@@ -48,8 +61,8 @@ describe('expressJsonData()', () => {
                 let req = nodeMocksHttp.createRequest({ method: 'GET', url: '/notTestItem' });
                 let res = nodeMocksHttp.createResponse();
 
-                sinon.spy(res, 'status');
-                sinon.spy(res, 'end');
+                sandbox.spy(res, 'status');
+                sandbox.spy(res, 'end');
 
                 // When
                 expressJsonData({ data })(req, res);
@@ -67,8 +80,8 @@ describe('expressJsonData()', () => {
             let req = nodeMocksHttp.createRequest({ method: 'DELETE', url: '/' });
             let res = nodeMocksHttp.createResponse();
 
-            sinon.spy(res, 'status');
-            sinon.spy(res, 'end');
+            sandbox.spy(res, 'status');
+            sandbox.spy(res, 'end');
 
             // When
             expressJsonData({ data })(req, res);
@@ -88,8 +101,8 @@ describe('expressJsonData()', () => {
                 let req = nodeMocksHttp.createRequest({ method: 'DELETE', url: '/testItem' });
                 let res = nodeMocksHttp.createResponse();
 
-                sinon.spy(res, 'status');
-                sinon.spy(res, 'end');
+                sandbox.spy(res, 'status');
+                sandbox.spy(res, 'end');
 
                 // When
                 expressJsonData({ data })(req, res);
@@ -108,8 +121,8 @@ describe('expressJsonData()', () => {
                 let req = nodeMocksHttp.createRequest({ method: 'DELETE', url: '/notTestItem' });
                 let res = nodeMocksHttp.createResponse();
 
-                sinon.spy(res, 'status');
-                sinon.spy(res, 'end');
+                sandbox.spy(res, 'status');
+                sandbox.spy(res, 'end');
 
                 // When
                 expressJsonData({ data })(req, res);
@@ -127,8 +140,8 @@ describe('expressJsonData()', () => {
             let req = nodeMocksHttp.createRequest({ method: 'PUT', url: '/', body: { newTestItem: { newTestItemKey: 'New Test Item Value' } } });
             let res = nodeMocksHttp.createResponse();
 
-            sinon.spy(res, 'status');
-            sinon.spy(res, 'json');
+            sandbox.spy(res, 'status');
+            sandbox.spy(res, 'json');
 
             // When
             expressJsonData({ data })(req, res);
@@ -147,8 +160,8 @@ describe('expressJsonData()', () => {
             let req = nodeMocksHttp.createRequest({ method: 'PUT', url: '/testItem', body: { newTestItemKey: 'New Test Item Value' } });
             let res = nodeMocksHttp.createResponse();
 
-            sinon.spy(res, 'status');
-            sinon.spy(res, 'json');
+            sandbox.spy(res, 'status');
+            sandbox.spy(res, 'json');
 
             // When
             expressJsonData({ data })(req, res);
@@ -167,8 +180,8 @@ describe('expressJsonData()', () => {
             let req = nodeMocksHttp.createRequest({ method: 'POST', url: '/', body: { newTestItem: { newTestItemKey: 'New Test Item Value' } } });
             let res = nodeMocksHttp.createResponse();
 
-            sinon.spy(res, 'status');
-            sinon.spy(res, 'json');
+            sandbox.spy(res, 'status');
+            sandbox.spy(res, 'json');
 
             // When
             expressJsonData({ data })(req, res);
@@ -187,8 +200,8 @@ describe('expressJsonData()', () => {
             let req = nodeMocksHttp.createRequest({ method: 'POST', url: '/testItem', body: { newTestItemKey: 'New Test Item Value' } });
             let res = nodeMocksHttp.createResponse();
 
-            sinon.spy(res, 'status');
-            sinon.spy(res, 'json');
+            sandbox.spy(res, 'status');
+            sandbox.spy(res, 'json');
 
             // When
             expressJsonData({ data })(req, res);
@@ -208,8 +221,8 @@ describe('expressJsonData()', () => {
                 let req = nodeMocksHttp.createRequest({ method: 'PATCH', url: '/', body: { op: 'replace', path: '/testItem', value: { newTestItemKey: 'New Test Item Value' } } });
                 let res = nodeMocksHttp.createResponse();
 
-                sinon.spy(res, 'status');
-                sinon.spy(res, 'json');
+                sandbox.spy(res, 'status');
+                sandbox.spy(res, 'json');
 
                 // When
                 expressJsonData({ data })(req, res);
@@ -228,8 +241,8 @@ describe('expressJsonData()', () => {
                 let req = nodeMocksHttp.createRequest({ method: 'PATCH', url: '/', body: [{ op: 'replace', path: '/testItem', value: { newTestItemKey: 'New Test Item Value' } }] });
                 let res = nodeMocksHttp.createResponse();
 
-                sinon.spy(res, 'status');
-                sinon.spy(res, 'json');
+                sandbox.spy(res, 'status');
+                sandbox.spy(res, 'json');
 
                 // When
                 expressJsonData({ data })(req, res);
@@ -251,8 +264,8 @@ describe('expressJsonData()', () => {
                     let req = nodeMocksHttp.createRequest({ method: 'PATCH', url: '/testItem', body: { op: 'replace', path: '/testItemKey', value: 'New Test Item Value' } });
                     let res = nodeMocksHttp.createResponse();
 
-                    sinon.spy(res, 'status');
-                    sinon.spy(res, 'json');
+                    sandbox.spy(res, 'status');
+                    sandbox.spy(res, 'json');
 
                     // When
                     expressJsonData({ data })(req, res);
@@ -271,8 +284,8 @@ describe('expressJsonData()', () => {
                     let req = nodeMocksHttp.createRequest({ method: 'PATCH', url: '/testItem', body: [{ op: 'replace', path: '/testItemKey', value: 'New Test Item Value' }] });
                     let res = nodeMocksHttp.createResponse();
 
-                    sinon.spy(res, 'status');
-                    sinon.spy(res, 'json');
+                    sandbox.spy(res, 'status');
+                    sandbox.spy(res, 'json');
 
                     // When
                     expressJsonData({ data })(req, res);
@@ -292,8 +305,8 @@ describe('expressJsonData()', () => {
                 let req = nodeMocksHttp.createRequest({ method: 'PATCH', url: '/notTestItem' });
                 let res = nodeMocksHttp.createResponse();
 
-                sinon.spy(res, 'status');
-                sinon.spy(res, 'end');
+                sandbox.spy(res, 'status');
+                sandbox.spy(res, 'end');
 
                 // When
                 expressJsonData({ data })(req, res);
