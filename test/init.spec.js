@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 
 beforeEach(() => {
-    global.sinon = sinon.sandbox.create();
+    global.sinon = sinon.createSandbox();
 });
 
 afterEach(() => {
