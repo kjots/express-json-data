@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "gulp clean && gulp test",
-    "prepublish": "gulp clean && gulp compile"
+    "prepare": "gulp clean && gulp compile"
   },
   "homepage": "https://github.com/kjots/express-json-data#readme",
   "repository": {
