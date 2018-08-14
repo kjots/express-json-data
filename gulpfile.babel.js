@@ -86,4 +86,8 @@ gulp.task('watch:compile', [ 'compile' ], () => {
         });
 });
 
-gulp.task('clean', () => del([ libBaseDir ]));
+gulp.task('clean', [ 'clean:coverage', 'clean:lib' ]);
+
+gulp.task('clean:coverage', () => del([ '.nyc_output', 'coverage' ]));
+
+gulp.task('clean:lib', () => del([ libBaseDir ]));

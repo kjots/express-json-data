@@ -22,6 +22,16 @@ describe('expressJsonData()', () => {
         data = { testItem: { testItemKey: 'Test Item Value' } };
     });
 
+    it('should create the express router', () => {
+        // Given
+
+        // When
+        const router = expressJsonData();
+
+        // Then
+        expect(router).to.not.be.undefined;
+    });
+
     context('on GET /', () => {
         it('should respond with the data', () => {
             // Given
