@@ -8,12 +8,25 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
         Object.keys(data).forEach(key => delete data[key]);
     }
 
+    function path2pointer(path) {
+        return path
+            .split('/')
+            .map(component => fastJsonPatch.escapePathComponent(decodeURIComponent(component)))
+            .join('/');
+    }
+
+    function jsonPointerDecoder(req, res, next) {
+        req.pointer = path2pointer(req.path);
+        next();
+    }
+
     return express.Router()
+        .use(jsonPointerDecoder)
         .get('/', (req, res) => {
             return res.json(data);
         })
         .get('/*', (req, res) => {
-            let value = fastJsonPatch.getValueByPointer(data, req.path);
+            let value = fastJsonPatch.getValueByPointer(data, req.pointer);
             if (value === undefined) {
                 return res.status(404).end();
             }
@@ -26,11 +39,11 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
             return res.status(204).end();
         })
         .delete('/*', (req, res) => {
-            if (fastJsonPatch.getValueByPointer(data, req.path) === undefined) {
+            if (fastJsonPatch.getValueByPointer(data, req.pointer) === undefined) {
                 return res.status(404).end();
             }
 
-            fastJsonPatch.applyOperation(data, { op: 'remove', path: req.path });
+            fastJsonPatch.applyOperation(data, { op: 'remove', path: req.pointer });
 
             return res.status(204).end();
         })
@@ -43,7 +56,7 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
             return res.status(201).json(data);
         })
         .put('/*', (req, res) => {
-            fastJsonPatch.applyOperation(data, { op: 'replace', path: req.path, value: req.body });
+            fastJsonPatch.applyOperation(data, { op: 'replace', path: req.pointer, value: req.body });
 
             return res.status(201).json(req.body);
         })
@@ -53,9 +66,9 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
             return res.status(201).json(data);
         })
         .post('/*', (req, res) => {
-            let value = _.merge({}, fastJsonPatch.getValueByPointer(data, req.path), req.body);
+            let value = _.merge({}, fastJsonPatch.getValueByPointer(data, req.pointer), req.body);
 
-            fastJsonPatch.applyOperation(data, { op: 'replace', path: req.path, value });
+            fastJsonPatch.applyOperation(data, { op: 'replace', path: req.pointer, value });
 
             return res.status(201).json(value);
         })
@@ -70,7 +83,7 @@ export default function expressJsonData({ data = {}, limit, type = [ 'applicatio
             return res.status(201).json(data);
         })
         .patch('/*', (req, res) => {
-            let value = fastJsonPatch.getValueByPointer(data, req.path);
+            let value = fastJsonPatch.getValueByPointer(data, req.pointer);
             if (value === undefined) {
                 return res.status(404).end();
             }
