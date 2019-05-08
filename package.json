@@ -3,6 +3,7 @@
   "version": "3.1.0",
   "description": "Express JSON data router",
   "main": "lib/index.js",
+  "types": "types.d.ts",
   "scripts": {
     "test": "gulp clean && gulp test && cross-env NODE_ENV=test nyc gulp test:mocha",
     "prepare": "gulp clean && gulp compile"
@@ -28,6 +29,8 @@
     "npm": ">=6.4.1"
   },
   "devDependencies": {
+    "@types/express": "^4.16.1",
+    "@types/node": "^8.10.48",
     "babel-core": "^6.26.3",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-polyfill": "^6.26.0",
