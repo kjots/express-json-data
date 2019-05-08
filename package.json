@@ -31,32 +31,32 @@
     "babel-core": "^6.26.3",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-polyfill": "^6.26.0",
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "chalk": "^2.4.1",
+    "chalk": "^2.4.2",
     "chokidar": "^2.0.4",
     "cross-env": "^5.2.0",
     "del": "^3.0.0",
-    "eslint": "^5.3.0",
+    "eslint": "^5.16.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
     "gulp-eslint": "^5.0.0",
     "gulp-mocha": "^6.0.0",
-    "gulp-sourcemaps": "^2.6.4",
+    "gulp-sourcemaps": "^2.6.5",
     "gulp-util": "^3.0.8",
     "mocha": "^5.2.0",
-    "node-mocks-http": "^1.7.0",
+    "node-mocks-http": "^1.7.5",
     "nyc": "^12.0.2",
     "sinon": "^6.1.5",
-    "sinon-chai": "^3.2.0"
+    "sinon-chai": "^3.3.0"
   },
   "peerDependencies": {
     "babel-polyfill": "^6.26.0"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "fast-json-patch": "^2.0.6",
-    "lodash": "^4.17.10"
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "fast-json-patch": "^2.1.0",
+    "lodash": "^4.17.11"
   }
 }
