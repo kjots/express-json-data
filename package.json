@@ -24,8 +24,8 @@
     "url": "https://github.com/kjots/express-json-data/issues"
   },
   "engines": {
-    "node": ">=8.11.3",
-    "npm": ">=5.6.0"
+    "node": ">=8.16.0",
+    "npm": ">=6.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
