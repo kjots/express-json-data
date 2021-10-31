@@ -15,5 +15,4 @@
 /.babelrc
 /.eslintrc.js
 /.nycrc
-/.travis.yml
 /gulpfile.babel.js

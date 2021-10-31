@@ -1,6 +1,5 @@
 # express-json-data
 
-[![Build Status](https://travis-ci.org/kjots/express-json-data.svg?branch=master)](https://travis-ci.org/kjots/express-json-data)
 [![npm version](https://badge.fury.io/js/%40kjots%2Fexpress-json-data.svg)](https://www.npmjs.com/package/@kjots/express-json-data)
 
 > A JSON data object Express router with PATCH support.
