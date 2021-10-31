@@ -13,6 +13,7 @@
     "prepare": "npm-run-all prepare:husky prepare:package",
     "prepare:husky": "husky install",
     "prepare:package": "npm-run-all clean build",
+    "release": "standard-version",
     "test": "npm-run-all test:eslint test:mocha",
     "test:eslint": "eslint src",
     "test:mocha": "cross-env NODE_ENV=test nyc mocha --require babel-core/register --require babel-polyfill src/**/*.spec.js"
@@ -57,7 +58,8 @@
     "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
     "sinon": "^11.1.2",
-    "sinon-chai": "^3.7.0"
+    "sinon-chai": "^3.7.0",
+    "standard-version": "^9.3.2"
   },
   "peerDependencies": {
     "babel-polyfill": "^6.26.0"
