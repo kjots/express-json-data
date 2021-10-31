@@ -12,6 +12,7 @@
 /.husky/
 /.nyc_output/
 /coverage/
+/src/
 /tmp/
 /.babelrc
 /.commitlintrc
