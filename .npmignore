@@ -9,6 +9,7 @@
 /.npmignore
 /npm-debug.log
 
+/.husky/
 /.nyc_output/
 /coverage/
 /tmp/
