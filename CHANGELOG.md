@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/kjots/express-json-data/compare/v4.0.0...v4.1.0) (2021-11-10)
+
+
+### Features
+
+* update to use Babel 7 ([0f3793d](https://github.com/kjots/express-json-data/commit/0f3793d9d9e74da390429aacf3dde03e3bfbc5a3))
+
 ## [4.0.0](https://github.com/kjots/express-json-data/compare/v3.2.1...v4.0.0) (2021-10-31)
 
 
