@@ -27,8 +27,6 @@ let app = express()
 ### As an ES5 module
 
 ```js
-require('babel-polyfill');
-
 var express = require('express');
 var expressJsonData = require('@kjots/express-json-data').default;
 
