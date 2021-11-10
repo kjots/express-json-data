@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "types": "types.d.ts",
   "scripts": {
-    "build": "babel src --out-dir lib --ignore src/**/*.spec.js --source-maps --quiet",
-    "build:watch": "babel src --out-dir lib --ignore src/**/*.spec.js --source-maps --watch",
+    "build": "babel src --out-dir lib --ignore 'src/**/*.spec.js' --source-maps --quiet",
+    "build:watch": "babel src --out-dir lib --ignore 'src/**/*.spec.js' --source-maps --watch",
     "clean": "npm-run-all clean:coverage clean:lib",
     "clean:coverage": "rimraf .nyc_output coverage",
     "clean:lib": "rimraf lib",
